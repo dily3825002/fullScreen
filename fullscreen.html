@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>全屏</title>
+	<style type="text/css">
+		#fullscreen{
+			margin: 0 auto;
+			width:1200px;
+			height: 300px;
+			border: 1px solid #ccc;
+			position: relative;
+		}
+		.btn{
+			position: absolute;
+			right: 20px;
+			bottom: 10px;
+			z-index: 999;
+		}
+		.btn span{
+			width: 50px;
+			height: 30px;
+			line-height: 30px;
+		}
+	</style>
+</head>
+<body>
+	<div id="fullscreen">
+		<div class="btn">
+			<span id="fullScreenBtn">全屏</span>
+			<span id="exitScreenBtn" style="display: none;">退出</span>	
+		</div>
+	</div>
+	<script type="text/javascript">
+		//启动全屏
+		function launchFullScreen(element){
+			if(element.requestFullscreen){
+				element.requestFullscreen();
+			}else if(element.mozRequestFullScreen){
+				element.mozRequestFullScreen();
+			}else if (element.webkitRequestFullScreen) {
+				element.webkitRequestFullScreen();
+			}else if(element.msRequestFullscreen){
+				element.msRequestFullscreen();
+			}
+		}
+
+		//退出全屏
+		function exitFullScreen(){
+			if(document.exitFullscreen){
+				document.exitFullscreen();
+			}else if(document.mozCancelFullScreen){
+				document.mozCancelFullScreen();
+			}else if(document.webkitExitFullscreen){
+				document.webkitExitFullscreen();
+			}
+		}
+
+		var fullscreen = document.getElementById("fullscreen");
+		var showBtn = document.getElementById("fullScreenBtn");
+		var hideBtn = document.getElementById("exitScreenBtn");
+		showBtn.onclick=function(){
+			hideBtn.style.display='block';
+			showBtn.style.display='none';
+			launchFullScreen(fullscreen);
+		}
+		hideBtn.onclick=function(){
+			hideBtn.style.display='none';
+			showBtn.style.display='block';
+			exitFullScreen(fullscreen);
+		}
+
+	</script>
+</body>
+</html>
